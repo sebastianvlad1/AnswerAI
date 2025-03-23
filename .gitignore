@@ -1,0 +1,20 @@
+# Ignore Mac OS metadata files
+.DS_Store
+
+# Ignore environment variables file
+.env
+
+# Ignore JetBrains IDE metadata
+.idea/
+
+# Ignore data directory
+app/Data/
+
+# Ignore models directory
+app/Models/
+
+# Ignore Python cache
+app/__pycache__/
+
+# Ignore Kubernetes configurations
+k8s/
