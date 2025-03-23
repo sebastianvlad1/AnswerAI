@@ -1,0 +1,10 @@
+fastapi==0.115.11
+uvicorn==0.34.0
+python-dotenv==1.0.1
+chromadb==0.6.3
+elasticsearch==8.17.2
+redis==5.2.1
+sentence-transformers==3.4.1
+llama-cpp-python==0.3.8
+prometheus-fastapi-instrumentator==7.1.0
+slowapi==0.1.9
