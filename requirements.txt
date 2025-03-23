@@ -8,3 +8,4 @@ sentence-transformers==3.4.1
 llama-cpp-python==0.3.8
 prometheus-fastapi-instrumentator==7.1.0
 slowapi==0.1.9
+python-dotenv==1.0.1
