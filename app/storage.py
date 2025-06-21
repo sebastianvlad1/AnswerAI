@@ -36,23 +36,6 @@ def build_es_index():
             es.index(index=ES.BM25_INDEX, id=idx, body={"text": doc})
 build_es_index()
 
-# Indexează documentele în ChromaDB
-# def index_chroma():
-#     docs = []
-#     embeddings = []
-#     metadatas = []
-#     from app.models import dense_encoder  # Importul se face aici pentru a evita dependențele circulare
-#     for idx, doc in enumerate(CUSTOM_DATA):
-#         docs.append(doc)
-#         if dense_encoder:
-#             emb = dense_encoder.encode(clean_text(doc)).tolist()
-#         else:
-#             emb = []
-#         embeddings.append(emb)
-#         metadatas.append({"id": idx})
-#     chroma_collection.add(documents=docs, embeddings=embeddings, metadatas=metadatas)
-# index_chroma()
-
 def index_chroma():
     docs = []
     embeddings = []

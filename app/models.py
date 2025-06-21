@@ -4,15 +4,25 @@ import time
 from llama_cpp import Llama
 from concurrent.futures import ThreadPoolExecutor
 from app.config import MODEL_CONFIG, DENSE_ENCODER_PATH, LLM_CONFIG
+import torch
 
-dense_encoder = None
+# Detectează dispozitivul o singură dată la început
+device = "cpu"
+if torch.backends.mps.is_available():
+    device = "mps"
+elif torch.cuda.is_available():
+    device = "cuda"
+
+print(f"Using device: {device}")
+
 try:
     from sentence_transformers import SentenceTransformer
-    import torch
-    #if torch.cuda.is_available():
     dense_encoder = SentenceTransformer(DENSE_ENCODER_PATH)
+    dense_encoder = dense_encoder.to(device)
+    print(f"Dense encoder loaded on device: {device}")
 except Exception as e:
     print(f"Dense encoder initialization error: {str(e)}")
+    dense_encoder = None
 
 # Configurare LLM – pool de instanțe Llama
 llama_pool = []
@@ -25,7 +35,8 @@ for _ in range(LLM_CONFIG.INSTANCES):
             n_threads=MODEL_CONFIG.N_THREADS,
             n_batch=MODEL_CONFIG.N_BATCH,
             use_mmap=MODEL_CONFIG.USE_MMAP,
-            verbose=MODEL_CONFIG.VERBOSE
+            verbose=MODEL_CONFIG.VERBOSE,
+            device_map=device
         )
         llama_pool.append(llm_instance)
     else:
