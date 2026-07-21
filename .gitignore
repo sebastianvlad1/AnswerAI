@@ -3,6 +3,13 @@
 
 # Ignore environment variables file
 .env
+.env.local
+
+# Ignore local Python environment and generated test/cache files
+.venv/
+.pytest_cache/
+__pycache__/
+*/__pycache__/
 
 # Ignore JetBrains IDE metadata
 .idea/
@@ -12,6 +19,11 @@ app/Data/
 
 # Ignore models directory
 app/Models/
+*.gguf
+*.ggml
+
+# Ignore local Chroma persistence
+chroma_db/
 
 # Ignore Python cache
 app/__pycache__/

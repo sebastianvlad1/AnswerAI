@@ -1,0 +1,50 @@
+[
+  {
+    "id": "doc-01",
+    "text": "AnswerAI is a retrieval augmented generation system that first retrieves relevant documents and then generates an answer using a local LLM."
+  },
+  {
+    "id": "doc-02",
+    "text": "Hybrid retrieval combines lexical search using Elasticsearch (BM25) with dense vector retrieval using ChromaDB embeddings to improve recall."
+  },
+  {
+    "id": "doc-03",
+    "text": "The API exposes a POST /answer endpoint that accepts a JSON body with a 'query' field and returns a JSON object containing 'answer', 'context', and 'timing'."
+  },
+  {
+    "id": "doc-04",
+    "text": "At startup the service builds an Elasticsearch index for BM25 and precomputes embeddings for each document to populate the Chroma collection."
+  },
+  {
+    "id": "doc-05",
+    "text": "Caching of retrieval results is implemented using Redis to reduce repeated searches for identical queries within a short time window."
+  },
+  {
+    "id": "doc-06",
+    "text": "The prompt construction concatenates the selected context documents with the user question to produce a single prompt for the LLM."
+  },
+  {
+    "id": "doc-07",
+    "text": "Configuration is driven by environment variables: DATASET_PATH, DENSE_ENCODER_PATH, MODEL_PATH, ES_HOST, REDIS_HOST, and UVICORN_HOST/PORT."
+  },
+  {
+    "id": "doc-08",
+    "text": "To run locally you can use Docker Compose to start Redis, Elasticsearch and Chroma, and run the FastAPI app with uvicorn."
+  },
+  {
+    "id": "doc-09",
+    "text": "Tests in this repository mock external services and verify that document ids are treated as canonical identifiers, not list indices."
+  },
+  {
+    "id": "doc-10",
+    "text": "When a dense encoder is unavailable a fallback embedding may be used to allow Chroma indexing to proceed, though results will be poorer."
+  },
+  {
+    "id": "doc-11",
+    "text": "The system merges BM25 and dense rankings by preserving the BM25 order first, then appending dense results while removing duplicates."
+  },
+  {
+    "id": "doc-12",
+    "text": "Example usage: POST {\"query\": \"What is AnswerAI used for?\"} returns context documents and a generated summary answer."
+  }
+]
